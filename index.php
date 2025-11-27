@@ -216,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </article>
                 <article class="project-card">
-                    <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1600607687644-c7171b42498b?auto=format&fit=crop&w=1200&q=80');"></div>
+                    <div class="project-image" style="background-image: url('assets/images/Riad Sidrat.jpeg');"></div>
                     <div class="project-info">
                         <h3>Riad Dar Lalla</h3>
                         <p>Rénovation patrimoniale avec intégration domotique et zellige sur mesure.</p>

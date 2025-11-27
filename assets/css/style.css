@@ -314,29 +314,41 @@ header.hero .navbar,
 
 .nav-toggle-label {
     display: none;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     cursor: pointer;
     position: relative;
-    /* z-index أقل من navbar - داخل navbar */
-    z-index: 1;
-    padding: 8px;
+    z-index: 10000 !important; /* أعلى من navbar لضمان أنه قابل للنقر */
+    padding: 10px;
     border-radius: 8px;
-    transition: background 0.2s ease;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .nav-toggle-label:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-toggle-label:active {
     background: rgba(255, 255, 255, 0.1);
+    transform: scale(0.95);
 }
 
 .nav-toggle-label span {
     display: block;
     width: 24px;
-    height: 2px;
-    background: var(--light);
+    height: 2.5px;
+    background: var(--text);
     border-radius: 2px;
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0 auto;
 }
 
 .nav-toggle-label span::before,
@@ -345,10 +357,10 @@ header.hero .navbar,
     position: absolute;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: var(--light);
+    height: 2.5px;
+    background: var(--text);
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-toggle-label span::before {
@@ -1294,7 +1306,17 @@ h3 {
     }
 
     .nav-toggle-label {
-        display: block;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10000 !important;
+        order: 2; /* يظهر بعد brand */
+        margin-left: auto; /* يدفعه إلى اليمين */
+    }
+    
+    .brand {
+        order: 1; /* يظهر قبل burger menu */
     }
 
     .nav-links {
@@ -1365,6 +1387,22 @@ h3 {
     .nav-links {
         width: 100%;
         max-width: 100vw;
+    }
+    
+    .nav-toggle-label {
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+    }
+    
+    .nav-toggle-label span {
+        width: 22px;
+        height: 2px;
+    }
+    
+    .nav-toggle-label span::before,
+    .nav-toggle-label span::after {
+        height: 2px;
     }
 }
 
