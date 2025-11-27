@@ -14,8 +14,8 @@
     <ul class="nav-links">
         <li><a href="#accueil">Accueil</a></li>
         <li><a href="#expertises">Expertises</a></li>
-        <li><a href="#realisations">Réalisations</a></li>
-        <li><a href="#valeurs">Valeurs</a></li>
+        <li><a href="#projetss">projets</a></li>
+        <li><a href="#valeurs">A propos</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
 </nav>

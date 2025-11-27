@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $alert = [
                 'type' => 'error',
-                'message' => "Votre message n'a pas pu être enregistré. Merci d'appeler le +212 6 00 00 00 00."
+                'message' => "Votre message n'a pas pu être enregistré. Merci d'appeler le 0524308038."
             ];
         }
     }
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <header class="hero" id="accueil">
         <div class="hero-content">
-            <p class="eyebrow">Depuis 2001 — Casablanca & Marrakech</p>
+            <p class="eyebrow">Depuis 2001 — Marrakech</p>
             <h1>Construire, rénover et sublimer les espaces de vie marocains.</h1>
             <p class="subtitle">
                 Atlas Cera réunit architectes, maîtres d'œuvre et artisans pour livrer des projets clés en main,
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
             <div class="hero-cta">
                 <a class="btn primary" href="#contact">Parler de votre projet</a>
-                <a class="btn ghost" href="#realisations">Voir nos réalisations</a>
+                <a class="btn ghost" href="#projets">Voir nos projets</a>
             </div>
             <div class="hero-stats">
                 <div>
@@ -168,20 +168,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
             <div class="split-media">
-                <div class="media-card primary" style="background-image: linear-gradient(135deg, rgba(239, 140, 65, 0.85), rgba(34, 23, 18, 0.75)), url('https://images.unsplash.com/photo-1581539250439-c96689b516dd?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
-                    <span>Ateliers Atlas</span>
-                    <strong>Menuiserie & Zellige</strong>
-                    <p>Des finitions inspirées des savoir-faire marocains.</p>
-                </div>
-                <div class="media-card secondary" style="background-image: linear-gradient(135deg, rgba(61, 80, 255, 0.6), rgba(21, 29, 48, 0.85)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
-                    <span>Hub client</span>
-                    <strong>Suivi en ligne</strong>
-                    <p>Planning, budgets et livrables accessibles 24/7.</p>
+                <!-- Gallery Grid for Construction Images -->
+                <div class="image-gallery">
+                    <div class="gallery-item gallery-item-large" style="background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80');">
+                        <div class="gallery-overlay">
+                            <span class="gallery-badge">Expertise</span>
+                            <strong>Installation précise</strong>
+                            <p>Nos artisans maîtrisent les techniques de pose les plus avancées</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" style="background-image: url('assets/images/outiles.jpg');">
+                        <div class="gallery-overlay">
+                            <span class="gallery-badge">Qualité</span>
+                            <strong>Outils professionnels</strong>
+                        </div>
+                    </div>
+                    <div class="gallery-item" style="background-image: url('assets/images/laser.jpg');">
+                        <div class="gallery-overlay">
+                            <span class="gallery-badge">Précision</span>
+                            <strong>Niveau laser</strong>
+                        </div>
+                    </div>
+                    <div class="gallery-item gallery-item-wide" style="background-image: url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80');">
+                        <div class="gallery-overlay">
+                            <span class="gallery-badge">Excellence</span>
+                            <strong>Finitions parfaites</strong>
+                            <p>Chaque détail compte pour un résultat impeccable</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="section dark" id="realisations">
+        <section class="section dark" id="projetss">
             <div class="section-header">
                 <p class="eyebrow">Réalisations</p>
                 <h2>Quelques projets récents</h2>
@@ -381,13 +400,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <strong>Atlas Cera</strong>
             <p>Construction • Rénovation • Décoration</p>
         </div>
-        <div>
-            <p>© <?php echo date('Y'); ?> Atlas Cera. Tous droits réservés.</p>
-        </div>
-        <div>
-            <a href="#accueil" class="btn ghost small">Retour en haut</a>
-        </div>
+       
     </footer>
+    
+    <!-- Bouton Retour en haut -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Retour en haut de la page">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+    
     <script>
         // ============================================
         // NAVBAR - Bootstrap-inspired fixed navbar
@@ -651,6 +673,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 });
             });
 
+        })();
+        
+        // ============================================
+        // Bouton Retour en haut (Scroll to Top)
+        // ============================================
+        (function() {
+            'use strict';
+            
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (!scrollToTopBtn) return;
+            
+            // Fonction pour afficher/masquer le bouton selon le scroll
+            function toggleScrollButton() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            }
+            
+            // Fonction pour remonter en haut avec scroll smooth
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Écouter le scroll
+            window.addEventListener('scroll', toggleScrollButton, { passive: true });
+            
+            // Écouter le clic sur le bouton
+            scrollToTopBtn.addEventListener('click', scrollToTop);
+            
+            // Vérifier la position initiale
+            toggleScrollButton();
         })();
     </script>
 </body>

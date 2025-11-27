@@ -579,6 +579,200 @@ h3 {
     gap: 1.5rem;
 }
 
+/* Professional Image Gallery for Valeurs Section */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 200px);
+    gap: 1rem;
+    width: 100%;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-attachment: local;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border: 2px solid transparent;
+}
+
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(239, 140, 65, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+.gallery-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(8, 10, 19, 0.3) 50%, rgba(8, 10, 19, 0.85) 100%);
+    z-index: 1;
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover::before {
+    opacity: 0.7;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 140, 65, 0.3);
+    z-index: 10;
+    border-color: rgba(239, 140, 65, 0.5);
+    background-size: 110%;
+}
+
+/* Animation for gallery items on load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-item {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.gallery-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.gallery-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.gallery-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.gallery-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.gallery-item-large {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+}
+
+.gallery-item-wide {
+    grid-column: 1 / 3;
+    grid-row: 3 / 4;
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 2rem;
+    z-index: 2;
+    color: #fff;
+    transform: translateY(10px);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover .gallery-overlay {
+    transform: translateY(0);
+}
+
+.gallery-badge {
+    display: inline-block;
+    padding: 0.35rem 0.8rem;
+    background: var(--primary);
+    color: #0c0d12;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 2px 8px rgba(239, 140, 65, 0.4);
+}
+
+.gallery-overlay strong {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-overlay p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive Gallery */
+@media (max-width: 900px) {
+    .image-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 250px);
+    }
+    
+    .gallery-item-large {
+        grid-column: 1;
+        grid-row: 1 / 2;
+    }
+    
+    .gallery-item-wide {
+        grid-column: 1;
+        grid-row: 4 / 5;
+    }
+    
+    .gallery-item {
+        grid-column: 1;
+    }
+}
+
+@media (max-width: 600px) {
+    .image-gallery {
+        grid-template-rows: repeat(4, 200px);
+        gap: 0.75rem;
+    }
+    
+    .gallery-overlay {
+        padding: 1rem 1.5rem;
+    }
+    
+    .gallery-overlay strong {
+        font-size: 1rem;
+    }
+    
+    .gallery-overlay p {
+        font-size: 0.8rem;
+    }
+}
+
 .media-card {
     border-radius: var(--radius);
     padding: 2rem;
@@ -798,7 +992,6 @@ h3 {
 }
 
 .contact-form input,
-.contact-form select,
 .contact-form textarea {
     padding: 0.9rem 1rem;
     border-radius: 0.85rem;
@@ -807,10 +1000,95 @@ h3 {
     font-size: 1rem;
     background: rgba(255, 255, 255, 0.08);
     color: var(--text);
+    transition: all 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(239, 140, 65, 0.15);
+}
+
+/* Professional Select Dropdown Styling */
+.contact-form select {
+    padding: 0.9rem 3rem 0.9rem 1rem;
+    border-radius: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-family: inherit;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ef8c41' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.contact-form select:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(239, 140, 65, 0.15), 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.contact-form select option {
+    background: #1a1d2e;
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    border: none;
+    font-size: 1rem;
+}
+
+.contact-form select option:first-child {
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+.contact-form select option:checked,
+.contact-form select option[selected] {
+    background: var(--primary);
+    color: #0c0d12;
+    font-weight: 600;
+}
+
+.contact-form select option:hover {
+    background: rgba(239, 140, 65, 0.25);
+    color: var(--text);
+}
+
+/* Custom select wrapper for better styling */
+.contact-form label {
+    position: relative;
+}
+
+.contact-form select::-ms-expand {
+    display: none;
 }
 
 .contact-form textarea {
     resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 3px rgba(239, 140, 65, 0.15);
 }
 
 .contact-details {
@@ -911,6 +1189,93 @@ h3 {
     gap: 1rem;
     align-items: center;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   Bouton Retour en haut (Scroll to Top)
+   ============================================ */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(239, 140, 0, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: #0c0d12;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(239, 140, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+    z-index: 9998;
+    padding: 0;
+    margin: 0;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.scroll-to-top:hover {
+    background: rgba(239, 140, 0, 1);
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 8px 30px rgba(239, 140, 0, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(239, 140, 0, 0.3), 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+    stroke: #0c0d12;
+    transition: transform 0.3s ease;
+}
+
+.scroll-to-top:hover svg {
+    transform: translateY(-2px);
+}
+
+/* Responsive pour le bouton */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        width: 50px;
+        height: 50px;
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .scroll-to-top svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-to-top {
+        width: 48px;
+        height: 48px;
+        bottom: 1rem;
+        right: 1rem;
+    }
+    
+    .scroll-to-top svg {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 /* ============================================
