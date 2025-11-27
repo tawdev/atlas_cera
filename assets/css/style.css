@@ -1,0 +1,1281 @@
+/* ============================================
+   ATLAS CERA - Stylesheet
+   ============================================
+   هذا الملف يحتوي على جميع styles للموقع
+   
+   ملاحظة مهمة حول z-index:
+   - Navbar: z-index: 99999 (أعلى من كل العناصر)
+   - Hero, Sections, Cards: z-index: 1 (أقل من navbar)
+   - هذا يضمن أن navbar دائماً فوق جميع الأقسام
+   ============================================ */
+
+:root {
+    --bg: #080b11;
+    --bg-soft: #0f141d;
+    --text: #f7f7f5;
+    --text-muted: #b8c0ce;
+    --primary: #ef8c41;
+    --primary-dark: #c46b28;
+    --secondary: #1c2533;
+    --card-glass: rgba(255, 255, 255, 0.05);
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    --radius: 1.5rem;
+    font-size: 16px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text);
+    background: radial-gradient(circle at top, #111827, #05070b 55%);
+    line-height: 1.6;
+    min-height: 100vh;
+    /* Bootstrap style: padding-top to account for fixed navbar */
+    padding-top: 70px; /* Will be adjusted by JavaScript */
+}
+
+/* ضمان أن main يبدأ من تحت navbar */
+main {
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Hero section - يبدأ من تحت navbar */
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(4, 6, 11, 0.95), rgba(8, 10, 19, 0.8)),
+        url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80') center/cover;
+    color: var(--text);
+    /* padding-top لتعويض ارتفاع navbar (حوالي 80px) */
+    padding-top: calc(80px + 2rem);
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 6rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* z-index منخفض - أقل من navbar */
+    /* navbar لديه position: fixed لذا يخرج من stacking context */
+    z-index: 1 !important;
+    /* scroll-margin-top للتنقل السلس */
+    scroll-margin-top: 80px;
+    /* منع overflow hidden الذي قد يخفي navbar */
+    overflow: visible !important;
+    /* إزالة isolation لمنع إنشاء stacking context جديد */
+    isolation: auto !important;
+    /* منع transform و filter التي قد تخلق stacking context */
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(239, 140, 65, 0.3), transparent 40%);
+    /* z-index سالب لضمان أنه تحت كل شيء، حتى navbar */
+    z-index: -1 !important;
+    /* منع أي تأثير على navbar */
+    pointer-events: none;
+}
+
+/* ============================================
+   NAVBAR - Bootstrap-inspired fixed navbar
+   ============================================
+   هذا الكود يضمن أن navbar ثابت في الأعلى دائماً
+   وفوق جميع الأقسام والعناصر الأخرى
+   
+   ملاحظة: navbar الآن منفصل في ملف navbar.php
+   خارج hero، مما يحل مشكلة stacking context
+   ============================================ */
+.navbar {
+    /* Layout - تخطيط navbar */
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    
+    /* Position - ثابت في الأعلى دائماً */
+    /* position: fixed - navbar الآن خارج hero، لذا لا توجد مشكلة stacking context */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    
+    /* z-index عالي جداً - هذا هو المفتاح الرئيسي */
+    /* يضمن أن navbar دائماً فوق كل العناصر (hero, sections, cards, etc) */
+    /* navbar الآن خارج hero، لذا لا توجد مشكلة stacking context */
+    z-index: 99999 !important; /* أعلى من أي عنصر آخر في الصفحة */
+    
+    /* Spacing */
+    padding: 1.25rem 4vw;
+    margin: 0 !important;
+    box-sizing: border-box;
+    
+    /* Appearance - Initial state */
+    background: rgba(8, 10, 19, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    
+    /* Visibility - مرئي دائماً */
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+    
+    /* Transform - لا يتحرك */
+    transform: translateY(0) !important;
+    -webkit-transform: translateY(0) !important;
+    
+    /* Transitions */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    
+    /* Pointer events */
+    pointer-events: auto !important;
+}
+
+/* Bootstrap fixed-top class support */
+.navbar.fixed-top {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: 0 !important;
+    /* z-index عالي جداً لضمان أن navbar فوق كل العناصر */
+    z-index: 99999 !important;
+}
+
+/* حالة التمرير - Bootstrap shadow style */
+.navbar.scrolled,
+.navbar.shadow {
+    background: rgba(8, 10, 19, 0.95) !important;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075), 
+                0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Bootstrap shadow */
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    /* يبقى ثابت ومرئي */
+    position: fixed !important;
+    top: 0 !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* قواعد قوية لمنع أي محاولة إخفاء */
+.navbar,
+.navbar * {
+    pointer-events: auto !important;
+}
+
+/* منع أي تأثيرات CSS قد تخفي navbar */
+/* حتى لو كان navbar داخل hero أو أي عنصر آخر */
+body .navbar,
+html .navbar,
+* .navbar,
+nav.navbar,
+header .navbar,
+.hero .navbar,
+header.hero .navbar,
+.hero nav.navbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    /* position: fixed يخرج navbar من stacking context للعناصر الأب */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    /* z-index عالي جداً - حتى لو كان داخل hero */
+    z-index: 99999 !important;
+    transform: translateY(0) !important;
+    -webkit-transform: translateY(0) !important;
+}
+
+/* جميع حالات navbar - يبقى مرئي */
+.navbar.scrolled,
+.navbar:not(.scrolled),
+.navbar[class*="scroll"],
+.navbar[class*="hide"],
+.navbar.hidden {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 0 !important;
+    transform: translateY(0) !important;
+}
+
+.brand {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text);
+    /* z-index أقل من navbar - داخل navbar */
+    z-index: 1;
+    position: relative;
+}
+
+.brand span {
+    color: var(--text);
+}
+
+.brand strong {
+    color: var(--primary);
+    margin-left: 0.15rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.35rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    /* z-index أقل من navbar - داخل navbar */
+    z-index: 1;
+}
+
+.nav-links a {
+    font-weight: 500;
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    color: var(--text);
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.nav-links a:active {
+    transform: translateY(0);
+}
+
+.nav-toggle {
+    display: none;
+}
+
+.nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+@media (max-width: 900px) {
+    .nav-overlay {
+        display: block;
+    }
+
+    .nav-toggle:checked ~ .nav-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.nav-toggle-label {
+    display: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    position: relative;
+    /* z-index أقل من navbar - داخل navbar */
+    z-index: 1;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.nav-toggle-label:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-toggle-label span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--light);
+    border-radius: 2px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--light);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-label span::before {
+    top: -8px;
+}
+
+.nav-toggle-label span::after {
+    top: 8px;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span {
+    background: transparent;
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.nav-toggle:checked ~ .nav-toggle-label span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+.hero-content {
+    max-width: 680px;
+    margin-top: auto;
+    padding: 2rem 0 0;
+}
+
+.eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4vw, 4rem);
+    margin: 1.5rem 0 1rem;
+    line-height: 1.15;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 3vw, 3rem);
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.95rem 1.9rem;
+    border-radius: 999px;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #ffb76b, #ef8c41);
+    color: #0c0d12;
+    box-shadow: 0 20px 40px rgba(239, 140, 65, 0.4);
+}
+
+.btn.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 30px 50px rgba(239, 140, 65, 0.55);
+}
+
+.btn.ghost {
+    border-color: rgba(255, 255, 255, 0.35);
+    color: #fff;
+    background: transparent;
+}
+
+.btn.ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.btn.small {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.85rem;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.hero-stats div {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.6rem;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-stats strong {
+    font-size: 2.1rem;
+    display: block;
+    font-family: 'Playfair Display', serif;
+}
+
+.section {
+    /* padding-top لضمان أن المحتوى يبدأ من تحت navbar */
+    padding-top: calc(80px + 3rem);
+    padding-left: 4vw;
+    padding-right: 4vw;
+    padding-bottom: 5.5rem;
+    position: relative;
+    color: var(--text);
+    /* z-index منخفض - أقل بكثير من navbar (99999) */
+    z-index: 1 !important;
+    /* scroll-margin-top للتنقل السلس - يعوض ارتفاع navbar */
+    scroll-margin-top: 80px;
+    /* منع overflow hidden */
+    overflow: visible !important;
+    /* إزالة isolation لمنع إنشاء stacking context جديد */
+    isolation: auto !important;
+}
+
+.section:nth-of-type(odd) {
+    background: var(--bg-soft);
+}
+
+.section:nth-of-type(even) {
+    background: #06080c;
+}
+
+.section.dark {
+    background: #05070b;
+    color: var(--text);
+}
+
+.section-header {
+    max-width: 700px;
+    margin-bottom: 3rem;
+    color: var(--text);
+}
+
+.grid {
+    display: grid;
+    gap: 2rem;
+}
+
+.cards {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+    background: var(--card-glass);
+    padding: 2.2rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(16px);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+/* Cards with background images */
+.card-with-image {
+    position: relative;
+    color: var(--text);
+}
+
+.card-with-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(8, 10, 19, 0.95), rgba(8, 10, 19, 0.85));
+    z-index: 0;
+}
+
+.card-with-image > * {
+    position: relative;
+    z-index: 1;
+}
+
+.card ul {
+    padding-left: 1.2rem;
+    margin: 1rem 0 0;
+    color: var(--muted);
+}
+
+.split {
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: center;
+}
+
+.split-media {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.media-card {
+    border-radius: var(--radius);
+    padding: 2rem;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.media-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+}
+
+.media-card.primary {
+    background: radial-gradient(circle at top left, rgba(239, 140, 65, 0.7), rgba(34, 23, 18, 0.6));
+}
+
+.media-card.secondary {
+    background: radial-gradient(circle at top right, rgba(61, 80, 255, 0.45), rgba(21, 29, 48, 0.8));
+}
+
+.media-card span {
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.pillars {
+    display: grid;
+    gap: 1.2rem;
+    margin-top: 2rem;
+}
+
+.pillars div {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.section.dark .project-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.projects {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.project-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #0b0e15;
+}
+
+.project-image {
+    height: 220px;
+    background-size: cover;
+    background-position: center;
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.process {
+    background: #06080c;
+}
+
+.timeline {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    counter-reset: steps;
+}
+
+.timeline div,
+.timeline-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline div:hover,
+.timeline-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(8, 10, 19, 0.9), rgba(8, 10, 19, 0.8));
+    z-index: 0;
+}
+
+.timeline-item > * {
+    position: relative;
+    z-index: 1;
+}
+
+.timeline span {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+}
+
+.testimonials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.testimonials-grid article,
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonials-grid article:hover,
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5);
+}
+
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(8, 10, 19, 0.95), rgba(8, 10, 19, 0.85));
+    z-index: 0;
+}
+
+.testimonial-card > * {
+    position: relative;
+    z-index: 1;
+}
+
+.contact {
+    background: #06080c;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.alert.success {
+    background: #ddf5dd;
+    color: #155724;
+}
+
+.alert.error {
+    background: #fde0df;
+    color: #b00020;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.contact-form {
+    display: grid;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2.4rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow);
+}
+
+.contact-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 0.95rem;
+    gap: 0.4rem;
+    color: var(--text);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    padding: 0.9rem 1rem;
+    border-radius: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: inherit;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text);
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-details {
+    background: rgba(8, 10, 19, 0.95);
+    color: var(--text);
+    padding: 2.4rem;
+    border-radius: var(--radius);
+    display: grid;
+    gap: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: var(--shadow);
+}
+
+.contact-details a {
+    color: var(--primary);
+    transition: color 0.3s ease;
+}
+
+.contact-details a:hover {
+    color: var(--primary-dark);
+}
+
+/* Social Links Styles */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.social-links a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.social-links a svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+/* Facebook specific color */
+.social-links a[aria-label="Facebook"]:hover {
+    color: #1877f2;
+}
+
+/* Instagram specific color */
+.social-links a[aria-label="Instagram"]:hover {
+    color: #e4405f;
+}
+
+/* TikTok specific color */
+.social-links a[aria-label="TikTok"]:hover {
+    color: #000000;
+}
+
+/* YouTube specific color */
+.social-links a[aria-label="YouTube"]:hover {
+    color: #ff0000;
+}
+
+/* Responsive for social links */
+@media (max-width: 600px) {
+    .social-links {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .social-links a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.footer {
+    background: linear-gradient(135deg, #05070b, #0d1018);
+    color: rgba(255, 255, 255, 0.78);
+    padding: 2.5rem 4vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   التصميم المتجاوب للموبايل - Responsive Design
+   ============================================ */
+@media (max-width: 900px) {
+    /* ضمان أن navbar ثابت حتى على الموبايل */
+    .navbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .nav-toggle-label {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0;
+        width: 300px;
+        max-width: 85vw;
+        height: 100vh;
+        background: rgba(8, 10, 19, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 5.5rem 2rem 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+        z-index: 9999 !important;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 1rem 1.2rem;
+        border-radius: 12px;
+        background: transparent;
+        font-size: 1rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:active {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-toggle:checked ~ .nav-links {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0) !important;
+    }
+
+    .hero {
+        padding-top: 6rem;
+    }
+
+    .hero-stats {
+        gap: 1.5rem;
+    }
+}
+
+/* تحسينات للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 1rem 1rem;
+    }
+
+    .brand {
+        font-size: 1.1rem;
+    }
+
+    .nav-links {
+        width: 100%;
+        max-width: 100vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero {
+        padding: 0 1.5rem 4rem;
+    }
+
+    .section {
+        padding: 4.5rem 1.5rem;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+    }
+}
+
+/* ============================================
+   قاعدة نهائية - NAVBAR مرئي دائماً
+   هذه القاعدة تطبق في النهاية لضمان الأولوية القصوى
+   حتى لو كان navbar داخل hero أو أي عنصر آخر
+   ============================================ */
+nav.navbar,
+.navbar,
+header nav.navbar,
+body > nav.navbar,
+html body nav.navbar,
+.hero nav.navbar,
+header.hero nav.navbar,
+header.hero .navbar,
+.hero .navbar {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    /* position: fixed يخرج navbar من stacking context */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    /* z-index عالي جداً - أعلى من hero و sections */
+    z-index: 99999 !important;
+    transform: translateY(0) !important;
+    -webkit-transform: translateY(0) !important;
+}
+
+/* ============================================
+   ضمان أن المحتوى يبدأ من تحت navbar دائماً
+   و z-index منخفض لضمان أن navbar فوقه
+   ============================================
+   جميع الأقسام يجب أن يكون z-index أقل من navbar (99999)
+   لضمان أن navbar دائماً فوقها
+   ============================================ */
+.hero,
+.section,
+main > *,
+header,
+section,
+div.section,
+div.hero,
+section#expertises,
+#expertises {
+    position: relative;
+    /* z-index منخفض جداً (1) - أقل بكثير من navbar (99999) */
+    /* هذا يضمن أن navbar دائماً فوق هذه العناصر */
+    z-index: 1 !important;
+    /* منع overflow hidden الذي قد يخفي navbar */
+    overflow: visible !important;
+    /* إزالة isolation لمنع إنشاء stacking context جديد */
+    /* navbar لديه position: fixed لذا يخرج من stacking context */
+    isolation: auto !important;
+}
+
+/* ضمان أن hero يبدأ من تحت navbar */
+.hero {
+    margin-top: 0;
+}
+
+/* ضمان أن sections تبدأ من تحت navbar */
+.section:first-of-type {
+    margin-top: 0;
+}
+
+/* تحسينات للشاشات الصغيرة */
+@media (max-width: 900px) {
+    .hero {
+        padding-top: calc(70px + 1.5rem) !important;
+        scroll-margin-top: 70px;
+    }
+    
+    .section {
+        padding-top: calc(70px + 2rem) !important;
+        scroll-margin-top: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding-top: calc(60px + 1rem) !important;
+        scroll-margin-top: 60px;
+    }
+    
+    .section {
+        padding-top: calc(60px + 1.5rem) !important;
+        scroll-margin-top: 60px;
+    }
+}
+
+/* ============================================
+   قواعد نهائية قوية - NAVBAR دائماً فوق كل العناصر
+   ============================================ */
+
+/* ضمان أن navbar لديه أعلى z-index ممكن */
+/* حتى لو كان داخل hero أو أي عنصر آخر */
+.navbar,
+.navbar.fixed-top,
+#mainNavbar,
+nav.navbar,
+.hero .navbar,
+header.hero .navbar,
+header .navbar,
+.hero nav.navbar,
+header.hero nav.navbar,
+body > nav.navbar,
+html body nav.navbar {
+    z-index: 99999 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    /* منع أي transform أو filter قد يخلق stacking context */
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+    /* ضمان visibility */
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+}
+
+/* ضمان أن جميع الأقسام لديها z-index أقل من navbar */
+.hero,
+.section,
+main,
+header,
+section,
+div[class*="section"],
+div[class*="hero"],
+.card,
+.project-card,
+.media-card,
+.timeline,
+.testimonials-grid,
+.contact-grid,
+/* قواعد خاصة لقسم Expertises */
+#expertises,
+section#expertises,
+.section#expertises {
+    z-index: 1 !important;
+    position: relative !important;
+    /* منع overflow hidden الذي قد يخفي navbar */
+    overflow: visible !important;
+    /* إزالة isolation */
+    isolation: auto !important;
+}
+
+/* قواعد خاصة لـ hero - منع أي شيء يخفي navbar */
+header.hero,
+.hero {
+    /* منع backdrop-filter على hero نفسه (فقط على navbar) */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* منع transform و filter */
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+}
+
+/* منع أي عنصر من إنشاء stacking context قد يخفي navbar */
+/* خاصة hero و sections */
+*:not(.navbar):not(.navbar *) {
+    isolation: auto !important;
+}
+
+/* قواعد خاصة لـ hero - منع stacking context */
+header.hero,
+.hero,
+header.hero *:not(.navbar):not(.navbar *) {
+    isolation: auto !important;
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+}
+
+/* ضمان أن navbar مرئي حتى في جميع الحالات */
+.navbar[style*="z-index"],
+.navbar[class*="z-index"] {
+    z-index: 99999 !important;
+}
+
+/* ============================================
+   قواعد نهائية نهائية - NAVBAR دائماً مرئي
+   هذه القواعد تطبق في النهاية لضمان الأولوية القصوى
+   ============================================ */
+html body nav.navbar,
+html body .navbar,
+body nav.navbar,
+body .navbar,
+header nav.navbar,
+header .navbar,
+.hero nav.navbar,
+.hero .navbar,
+header.hero nav.navbar,
+header.hero .navbar,
+#mainNavbar,
+nav#mainNavbar {
+    /* Position - ثابت دائماً */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    
+    /* z-index - أعلى من كل شيء */
+    z-index: 99999 !important;
+    
+    /* Display - مرئي دائماً */
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    
+    /* منع أي transform أو filter */
+    transform: none !important;
+    -webkit-transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+    
+    /* منع overflow */
+    overflow: visible !important;
+    
+    /* منع isolation */
+    isolation: auto !important;
+}
+
+/* ضمان أن hero لا يخفي navbar */
+html body header.hero,
+html body .hero,
+body header.hero,
+body .hero {
+    /* z-index منخفض */
+    z-index: 1 !important;
+    /* منع isolation */
+    isolation: auto !important;
+    /* منع overflow hidden */
+    overflow: visible !important;
+    /* منع transform و filter */
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+}
+
+/* ضمان أن sections لا تخفي navbar */
+html body section,
+html body .section,
+body section,
+body .section,
+section#expertises,
+#expertises {
+    /* z-index منخفض */
+    z-index: 1 !important;
+    /* منع isolation */
+    isolation: auto !important;
+    /* منع overflow hidden */
+    overflow: visible !important;
+}
+
