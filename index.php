@@ -200,6 +200,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </section>
 
+        <?php
+        // Lire les images du dossier gallery
+        $galleryDir = __DIR__ . '/gallery';
+        $galleryImages = [];
+        
+        if (is_dir($galleryDir)) {
+            $files = scandir($galleryDir);
+            foreach ($files as $file) {
+                if ($file !== '.' && $file !== '..') {
+                    $filePath = $galleryDir . '/' . $file;
+                    $fileInfo = pathinfo($filePath);
+                    if (isset($fileInfo['extension'])) {
+                        $ext = strtolower($fileInfo['extension']);
+                        if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+                            $galleryImages[] = 'gallery/' . $file;
+                        }
+                    }
+                }
+            }
+            usort($galleryImages, function($a, $b) {
+                return strcmp($a, $b);
+            });
+        }
+        ?>
+
+        
+
         <section class="section dark" id="projetss">
             <div class="section-header">
                 <p class="eyebrow">Réalisations</p>
@@ -257,7 +284,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </article>
             </div>
         </section>
-
+        <section class="section" id="gallery">
+            <?php include 'gallery.php'; ?>
+        </section>
         <section class="section process">
             <div class="section-header">
                 <p class="eyebrow">Méthodologie</p>
@@ -320,31 +349,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p>Nous intervenons partout au Maroc. Réponse sous 48h ouvrées.</p>
             </div>
             <?php if ($alert): ?>
-                <div class="alert <?php echo $alert['type']; ?>">
-                    <?php echo htmlspecialchars($alert['message'], ENT_QUOTES, 'UTF-8'); ?>
+                <div class="alert-card-container">
+                    <div class="alert-card <?php echo $alert['type']; ?>">
+                        <div class="alert-icon">
+                            <?php if ($alert['type'] === 'success'): ?>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            <?php else: ?>
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            <?php endif; ?>
+                        </div>
+                        <div class="alert-content">
+                            <h3><?php echo $alert['type'] === 'success' ? 'Message envoyé avec succès !' : 'Erreur'; ?></h3>
+                            <p><?php echo htmlspecialchars($alert['message'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        </div>
+                    </div>
                 </div>
             <?php endif; ?>
             <div class="contact-grid">
-                <form method="POST" class="contact-form">
+                <form method="POST" class="contact-form" id="contactForm">
                     <label>Nom complet*
-                        <input type="text" name="name" required value="<?php echo htmlspecialchars($name ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="text" name="name" required value="<?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($name ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </label>
                     <label>Email professionnel*
-                        <input type="email" name="email" required value="<?php echo htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="email" name="email" required value="<?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </label>
                     <label>Téléphone
-                        <input type="text" name="phone" value="<?php echo htmlspecialchars($phone ?? '', ENT_QUOTES, 'UTF-8'); ?>">
+                        <input type="text" name="phone" value="<?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($phone ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </label>
                     <label>Type de projet
                         <select name="project_type">
                             <option value="">Sélectionner</option>
-                            <option value="construction" <?php echo (isset($projectType) && $projectType === 'construction') ? 'selected' : ''; ?>>Construction neuve</option>
-                            <option value="renovation" <?php echo (isset($projectType) && $projectType === 'renovation') ? 'selected' : ''; ?>>Rénovation complète</option>
-                            <option value="decoration" <?php echo (isset($projectType) && $projectType === 'decoration') ? 'selected' : ''; ?>>Décoration & aménagement</option>
+                            <option value="construction" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'construction') ? 'selected' : ''); ?>>Construction neuve</option>
+                            <option value="renovation" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'renovation') ? 'selected' : ''); ?>>Rénovation complète</option>
+                            <option value="decoration" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'decoration') ? 'selected' : ''); ?>>Décoration & aménagement</option>
                         </select>
                     </label>
                     <label>Message*
-                        <textarea name="message" rows="4" required><?php echo htmlspecialchars($message ?? '', ENT_QUOTES, 'UTF-8'); ?></textarea>
+                        <textarea name="message" rows="4" required><?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($message ?? '', ENT_QUOTES, 'UTF-8'); ?></textarea>
                     </label>
                     <button type="submit" class="btn primary">Envoyer</button>
                 </form>
@@ -709,6 +757,260 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Vérifier la position initiale
             toggleScrollButton();
+        })();
+
+        // Gallery Slider
+        (function() {
+            'use strict';
+            
+            const slider = document.getElementById('gallerySlider');
+            const prevBtn = document.getElementById('galleryPrev');
+            const nextBtn = document.getElementById('galleryNext');
+            const dots = document.querySelectorAll('.gallery-dot');
+            const slides = document.querySelectorAll('.gallery-slide');
+            const currentSlideSpan = document.getElementById('currentSlide');
+            const totalSlidesSpan = document.getElementById('totalSlides');
+            
+            if (!slider || !slides.length) return;
+            
+            let currentIndex = 0;
+            let autoplayInterval = null;
+            const autoplayDelay = 5000; // 5 secondes
+            
+            // Initialiser le compteur
+            if (totalSlidesSpan) {
+                totalSlidesSpan.textContent = slides.length;
+            }
+            
+            function showSlide(index) {
+                // Retirer active de toutes les slides
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active', 'prev');
+                    if (i < index) {
+                        slide.classList.add('prev');
+                    }
+                });
+                
+                // Ajouter active à la slide courante
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                }
+                
+                // Mettre à jour les dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+                
+                // Mettre à jour le compteur
+                if (currentSlideSpan) {
+                    currentSlideSpan.textContent = index + 1;
+                }
+                
+                currentIndex = index;
+            }
+            
+            function nextSlide() {
+                const nextIndex = (currentIndex + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            function prevSlide() {
+                const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            function goToSlide(index) {
+                if (index >= 0 && index < slides.length) {
+                    showSlide(index);
+                }
+            }
+            
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayInterval = setInterval(nextSlide, autoplayDelay);
+            }
+            
+            function stopAutoplay() {
+                if (autoplayInterval) {
+                    clearInterval(autoplayInterval);
+                    autoplayInterval = null;
+                }
+            }
+            
+            // Event listeners
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    nextSlide();
+                    startAutoplay();
+                });
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', function() {
+                    prevSlide();
+                    startAutoplay();
+                });
+            }
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    goToSlide(index);
+                    startAutoplay();
+                });
+            });
+            
+            // Navigation clavier
+            document.addEventListener('keydown', function(e) {
+                const gallerySection = document.getElementById('gallery');
+                if (!gallerySection) return;
+                
+                const rect = gallerySection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (!isVisible) return;
+                
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    startAutoplay();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    startAutoplay();
+                }
+            });
+            
+            // Pause autoplay au survol
+            if (slider) {
+                slider.addEventListener('mouseenter', stopAutoplay);
+                slider.addEventListener('mouseleave', startAutoplay);
+            }
+            
+            // Touch events pour mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            if (slider) {
+                slider.addEventListener('touchstart', function(e) {
+                    touchStartX = e.changedTouches[0].screenX;
+                    stopAutoplay();
+                }, { passive: true });
+                
+                slider.addEventListener('touchend', function(e) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    startAutoplay();
+                }, { passive: true });
+            }
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+            
+            // Démarrer l'autoplay
+            startAutoplay();
+            
+            // Initialiser la première slide
+            showSlide(0);
+        })();
+        
+        // ============================================
+        // CONTACT FORM - Vider le formulaire et rester sur la section contact
+        // ============================================
+        (function() {
+            'use strict';
+            
+            const contactForm = document.getElementById('contactForm');
+            const contactSection = document.getElementById('contact');
+            const alertCard = document.querySelector('.alert-card');
+            
+            if (!contactForm) return;
+            
+            // Fonction pour scroller vers la section contact
+            function scrollToContactSection() {
+                if (!contactSection) return;
+                
+                setTimeout(function() {
+                    const navbar = document.getElementById('mainNavbar');
+                    const navbarHeight = navbar ? navbar.offsetHeight : 70;
+                    const sectionTop = contactSection.getBoundingClientRect().top + window.pageYOffset;
+                    const scrollPosition = sectionTop - navbarHeight - 20;
+                    
+                    window.scrollTo({
+                        top: Math.max(0, scrollPosition),
+                        behavior: 'smooth'
+                    });
+                }, 200);
+            }
+            
+            // Si une alerte existe, scroller vers la section contact
+            if (alertCard && contactSection) {
+                // Scroller vers la section contact
+                scrollToContactSection();
+                
+                // Si c'est une alerte de succès, vider le formulaire
+                if (alertCard.classList.contains('success')) {
+                    // Vider tous les champs du formulaire
+                    contactForm.reset();
+                    
+                    // S'assurer que tous les champs sont bien vidés
+                    const inputs = contactForm.querySelectorAll('input[type="text"], input[type="email"], textarea');
+                    inputs.forEach(input => {
+                        input.value = '';
+                    });
+                    
+                    // Réinitialiser le select à la première option
+                    const select = contactForm.querySelector('select[name="project_type"]');
+                    if (select) {
+                        select.selectedIndex = 0;
+                    }
+                }
+                
+                // Faire disparaître la carte après 3 secondes
+                setTimeout(function() {
+                    const alertContainer = alertCard.closest('.alert-card-container');
+                    if (alertContainer) {
+                        alertContainer.style.opacity = '0';
+                        alertContainer.style.transform = 'translateY(-20px)';
+                        alertContainer.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                        
+                        // Supprimer complètement l'élément après l'animation
+                        setTimeout(function() {
+                            if (alertContainer.parentNode) {
+                                alertContainer.parentNode.removeChild(alertContainer);
+                            }
+                        }, 500);
+                    }
+                }, 3000); // 3 secondes
+            }
+            
+            // Écouter la soumission du formulaire
+            contactForm.addEventListener('submit', function(e) {
+                // Ne pas empêcher la soumission normale
+                // Le scroll vers la section contact sera géré après le rechargement de la page
+            });
+            
+            // Si on arrive sur la page après une soumission (détection via hash ou referrer)
+            if (window.location.hash === '#contact') {
+                scrollToContactSection();
+            }
+            
+            // Détecter si on vient d'une soumission de formulaire
+            if (document.referrer && document.referrer.includes(window.location.hostname)) {
+                // Vérifier si on a un formulaire soumis récemment
+                const formSubmitted = sessionStorage.getItem('formSubmitted');
+                if (formSubmitted === 'true') {
+                    sessionStorage.removeItem('formSubmitted');
+                    scrollToContactSection();
+                }
+            }
         })();
     </script>
 </body>

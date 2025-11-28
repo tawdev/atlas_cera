@@ -12,11 +12,12 @@
     </label>
     <div class="nav-overlay"></div>
     <ul class="nav-links">
-        <li><a href="#accueil">Accueil</a></li>
-        <li><a href="#expertises">Expertises</a></li>
-        <li><a href="#projetss">projets</a></li>
-        <li><a href="#valeurs">A propos</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="index.php#accueil">Accueil</a></li>
+        <li><a href="index.php#expertises">Expertises</a></li>
+        <li><a href="index.php#projetss">Projets</a></li>
+        <li><a href="index.php#valeurs">A propos</a></li>
+        <li><a href="index.php#gallery">Galerie</a></li>
+        <li><a href="index.php#contact">Contact</a></li>
     </ul>
 </nav>
 
