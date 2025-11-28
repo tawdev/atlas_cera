@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <div class="hero-cta">
                 <a class="btn primary" href="#contact" data-translate="hero_cta_primary">Parler de votre projet</a>
-                <a class="btn ghost" href="#projets" data-translate="hero_cta_secondary">Voir nos projets</a>
+                <a class="btn ghost" href="#projetss" data-translate="hero_cta_secondary">Voir nos projets</a>
             </div>
         </div>
     </header>
