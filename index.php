@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css?v=1">
     <script src="assets/js/scroll-to-top.js" defer></script>
+    <script src="assets/js/translations.js" defer></script>
 </head>
 <body>
     <!-- Navbar منفصل - خارج hero -->
@@ -77,29 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <header class="hero" id="accueil">
         <div class="hero-content">
-            <p class="eyebrow">Depuis 2001 — Marrakech</p>
-            <h1>Construire, rénover et sublimer les espaces de vie marocains.</h1>
-            <p class="subtitle">
-                Atlas Cera réunit architectes, maîtres d'œuvre et artisans pour livrer des projets clés en main,
-                du gros œuvre jusqu'aux finitions décoratives.
-            </p>
+            <p class="eyebrow" data-translate="hero_eyebrow">Depuis 2001 — Marrakech</p>
+            <h1 data-translate="hero_title">Atlas <span class="hero-brand">Cera</span> : bâtir, rénover, sublimer.</h1>
+            
             <div class="hero-cta">
-                <a class="btn primary" href="#contact">Parler de votre projet</a>
-                <a class="btn ghost" href="#projets">Voir nos projets</a>
-            </div>
-            <div class="hero-stats">
-                <div>
-                    <strong>+350</strong>
-                    <span>Chantiers livrés</span>
-                </div>
-                <div>
-                    <strong>23</strong>
-                    <span>Ans d'expérience</span>
-                </div>
-                <div>
-                    <strong>98%</strong>
-                    <span>Clients satisfaits</span>
-                </div>
+                <a class="btn primary" href="#contact" data-translate="hero_cta_primary">Parler de votre projet</a>
+                <a class="btn ghost" href="#projets" data-translate="hero_cta_secondary">Voir nos projets</a>
             </div>
         </div>
     </header>
@@ -107,39 +91,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <section class="section" id="expertises">
             <div class="section-header">
-                <p class="eyebrow">Expertises</p>
-                <h2>Des solutions complètes pour vos projets</h2>
-                <p>
+                <p class="eyebrow" data-translate="expertises_eyebrow">Expertises</p>
+                <h2 data-translate="expertises_title">Des solutions complètes pour vos projets</h2>
+                <p data-translate="expertises_subtitle">
                     Nos équipes accompagnent promoteurs, hôteliers, institutions et particuliers exigeants
                     à travers tout le Royaume.
                 </p>
             </div>
             <div class="grid cards">
                 <article class="card card-with-image" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.95), rgba(8, 10, 19, 0.85)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
-                    <h3>Construction globale</h3>
-                    <p>Gestion intégrale de vos chantiers, du gros œuvre aux VRD, avec un suivi rigoureux et transparent.</p>
+                    <h3 data-translate="expertise_construction_title">Construction globale</h3>
+                    <p data-translate="expertise_construction_desc">Gestion intégrale de vos chantiers, du gros œuvre aux VRD, avec un suivi rigoureux et transparent.</p>
                     <ul>
-                        <li>Planification & pilotage BIM</li>
-                        <li>Structures béton & métal</li>
-                        <li>Conformité normes marocaines</li>
+                        <li data-translate="expertise_construction_item1">Planification & pilotage BIM</li>
+                        <li data-translate="expertise_construction_item2">Structures béton & métal</li>
+                        <li data-translate="expertise_construction_item3">Conformité normes marocaines</li>
                     </ul>
                 </article>
                 <article class="card card-with-image" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.95), rgba(8, 10, 19, 0.85)), url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
-                    <h3>Rénovation haut de gamme</h3>
-                    <p>Modernisation des villas, riads, bureaux et hôtels tout en respectant l'âme architecturale.</p>
+                    <h3 data-translate="expertise_renovation_title">Rénovation haut de gamme</h3>
+                    <p data-translate="expertise_renovation_desc">Modernisation des villas, riads, bureaux et hôtels tout en respectant l'âme architecturale.</p>
                     <ul>
-                        <li>Diagnostic structurel</li>
-                        <li>Optimisation énergétique</li>
-                        <li>Réaménagement sur-mesure</li>
+                        <li data-translate="expertise_renovation_item1">Diagnostic structurel</li>
+                        <li data-translate="expertise_renovation_item2">Optimisation énergétique</li>
+                        <li data-translate="expertise_renovation_item3">Réaménagement sur-mesure</li>
                     </ul>
                 </article>
                 <article class="card card-with-image" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.95), rgba(8, 10, 19, 0.85)), url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
-                    <h3>Décoration intérieure & extérieure</h3>
-                    <p>Designers, menuisiers et ateliers de finition pour matérialiser votre identité de marque.</p>
+                    <h3 data-translate="expertise_decoration_title">Décoration intérieure & extérieure</h3>
+                    <p data-translate="expertise_decoration_desc">Designers, menuisiers et ateliers de finition pour matérialiser votre identité de marque.</p>
                     <ul>
-                        <li>Concepts créatifs 3D</li>
-                        <li>Matières nobles & artisanat</li>
-                        <li>Aménagement paysager</li>
+                        <li data-translate="expertise_decoration_item1">Concepts créatifs 3D</li>
+                        <li data-translate="expertise_decoration_item2">Matières nobles & artisanat</li>
+                        <li data-translate="expertise_decoration_item3">Aménagement paysager</li>
                     </ul>
                 </article>
             </div>
@@ -147,24 +131,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <section class="section split" id="valeurs">
             <div class="split-text">
-                <p class="eyebrow">Pourquoi Atlas Cera ?</p>
-                <h2>Allier excellence technique et signature marocaine</h2>
-                <p>
+                <p class="eyebrow" data-translate="about_eyebrow">Pourquoi Atlas Cera ?</p>
+                <h2 data-translate="about_title">Allier excellence technique et signature marocaine</h2>
+                <p data-translate="about_subtitle">
                     Nous croyons que chaque projet mérite une attention artisanale, soutenue par des outils numériques de pointe.
                     Notre approche collaborative associe architectes, décorateurs et artisans marocains certifiés.
                 </p>
                 <div class="pillars">
                     <div>
-                        <strong>Engagement qualité</strong>
-                        <p>Contrôles hebdomadaires, reporting photo et garantis décennales.</p>
+                        <strong data-translate="about_pillar1_title">Engagement qualité</strong>
+                        <p data-translate="about_pillar1_desc">Contrôles hebdomadaires, reporting photo et garantis décennales.</p>
                     </div>
                     <div>
-                        <strong>Respect des délais</strong>
-                        <p>Méthodologie Lean Construction et partenaires fidélisés.</p>
+                        <strong data-translate="about_pillar2_title">Respect des délais</strong>
+                        <p data-translate="about_pillar2_desc">Méthodologie Lean Construction et partenaires fidélisés.</p>
                     </div>
                     <div>
-                        <strong>Approche durable</strong>
-                        <p>Matériaux locaux, gestion des déchets et optimisation énergétique.</p>
+                        <strong data-translate="about_pillar3_title">Approche durable</strong>
+                        <p data-translate="about_pillar3_desc">Matériaux locaux, gestion des déchets et optimisation énergétique.</p>
                     </div>
                 </div>
             </div>
@@ -230,9 +214,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <section class="section dark" id="projetss">
             <div class="section-header">
-                <p class="eyebrow">Réalisations</p>
-                <h2>Quelques projets récents</h2>
-                <p>Des espaces imaginés et construits avec passion dans tout le Maroc.</p>
+                <p class="eyebrow" data-translate="projects_eyebrow">Réalisations</p>
+                <h2 data-translate="projects_title">Quelques projets récents</h2>
+                <p data-translate="projects_subtitle">Des espaces imaginés et construits avec passion dans tout le Maroc.</p>
             </div>
             <div class="grid projects">
                 <article class="project-card">
@@ -286,46 +270,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </section>
         <section class="section" id="gallery">
-            <?php include 'gallery.php'; ?>
+            <div class="section-header">
+                <p class="eyebrow" data-translate="gallery_eyebrow">Galerie Photos</p>
+                <h2 data-translate="gallery_title">Nos Réalisations en Images</h2>
+                <p data-translate="gallery_subtitle">Découvrez nos projets de construction, rénovation et décoration à travers le Maroc</p>
+            </div>
+            
+            <?php if (!empty($galleryImages)): ?>
+            <div class="modern-gallery-container">
+                <div class="modern-gallery-grid" id="modernGallery">
+                    <?php foreach ($galleryImages as $index => $image): ?>
+                        <div class="modern-gallery-item" data-index="<?php echo $index; ?>">
+                            <img src="<?php echo htmlspecialchars($image, ENT_QUOTES, 'UTF-8'); ?>" 
+                                 alt="Galerie Atlas Cera - Image <?php echo $index + 1; ?>"
+                                 data-src="<?php echo htmlspecialchars($image, ENT_QUOTES, 'UTF-8'); ?>"
+                                 loading="<?php echo $index < 8 ? 'eager' : 'lazy'; ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            
+            <!-- Lightbox Modal -->
+            <div class="lightbox-modal" id="lightboxModal">
+                <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Image précédente">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Image suivante">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+                <div class="lightbox-content">
+                    <img id="lightboxImage" src="" alt="Lightbox Image">
+                    <div class="lightbox-counter">
+                        <span id="lightboxCurrent">1</span> / <span id="lightboxTotal"><?php echo count($galleryImages); ?></span>
+                    </div>
+                </div>
+            </div>
+            <?php else: ?>
+                <div class="gallery-empty">
+                    <p data-translate="gallery_empty">Aucune image disponible pour le moment.</p>
+                </div>
+            <?php endif; ?>
         </section>
         <section class="section process">
             <div class="section-header">
-                <p class="eyebrow">Méthodologie</p>
-                <h2>Un accompagnement clair en 5 étapes</h2>
+                <p class="eyebrow" data-translate="process_eyebrow">Méthodologie</p>
+                <h2 data-translate="process_title">Un accompagnement clair en 5 étapes</h2>
             </div>
             <div class="timeline">
                 <div class="timeline-item" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.9), rgba(8, 10, 19, 0.8)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
                     <span>01</span>
-                    <strong>Immersion</strong>
-                    <p>Visite des lieux, étude du cahier des charges et chiffrage transparent.</p>
+                    <strong data-translate="process_step1_title">Immersion</strong>
+                    <p data-translate="process_step1_desc">Visite des lieux, étude du cahier des charges et chiffrage transparent.</p>
                 </div>
                 <div class="timeline-item" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.9), rgba(8, 10, 19, 0.8)), url('https://images.unsplash.com/photo-1558655146-364adaf1fcc9?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
                     <span>02</span>
-                    <strong>Design & BIM</strong>
-                    <p>Modélisation 3D, choix des matériaux et validation des prototypes.</p>
+                    <strong data-translate="process_step2_title">Design & BIM</strong>
+                    <p data-translate="process_step2_desc">Modélisation 3D, choix des matériaux et validation des prototypes.</p>
                 </div>
                 <div class="timeline-item" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.9), rgba(8, 10, 19, 0.8)), url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
                     <span>03</span>
-                    <strong>Préparation</strong>
-                    <p>Planning détaillé, sélection des artisans et logistique sur site.</p>
+                    <strong data-translate="process_step3_title">Préparation</strong>
+                    <p data-translate="process_step3_desc">Planning détaillé, sélection des artisans et logistique sur site.</p>
                 </div>
                 <div class="timeline-item" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.9), rgba(8, 10, 19, 0.8)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
                     <span>04</span>
-                    <strong>Exécution</strong>
-                    <p>Suivi chantier, contrôles qualité et comptes-rendus hebdomadaires.</p>
+                    <strong data-translate="process_step4_title">Exécution</strong>
+                    <p data-translate="process_step4_desc">Suivi chantier, contrôles qualité et comptes-rendus hebdomadaires.</p>
                 </div>
                 <div class="timeline-item" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.9), rgba(8, 10, 19, 0.8)), url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
                     <span>05</span>
-                    <strong>Livraison</strong>
-                    <p>Réception, garanties, formation des équipes et maintenance.</p>
+                    <strong data-translate="process_step5_title">Livraison</strong>
+                    <p data-translate="process_step5_desc">Réception, garanties, formation des équipes et maintenance.</p>
                 </div>
             </div>
         </section>
 
         <section class="section testimonials">
             <div class="section-header">
-                <p class="eyebrow">Ils nous font confiance</p>
-                <h2>Témoignages clients</h2>
+                <p class="eyebrow" data-translate="testimonials_eyebrow">Ils nous font confiance</p>
+                <h2 data-translate="testimonials_title">Témoignages clients</h2>
             </div>
             <div class="grid testimonials-grid">
                 <article class="testimonial-card" style="background-image: linear-gradient(135deg, rgba(8, 10, 19, 0.95), rgba(8, 10, 19, 0.85)), url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80'); background-size: cover; background-position: center;">
@@ -345,9 +378,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <section class="section contact" id="contact">
             <div class="section-header">
-                <p class="eyebrow">Contact</p>
-                <h2>Parlons de votre projet</h2>
-                <p>Nous intervenons partout au Maroc. Réponse sous 48h ouvrées.</p>
+                <p class="eyebrow" data-translate="contact_eyebrow">Contact</p>
+                <h2 data-translate="contact_title">Parlons de votre projet</h2>
+                <p data-translate="contact_subtitle">Nous intervenons partout au Maroc. Réponse sous 48h ouvrées.</p>
             </div>
             <?php if ($alert): ?>
                 <div class="alert-card-container">
@@ -375,27 +408,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             <div class="contact-grid">
                 <form method="POST" class="contact-form" id="contactForm">
-                    <label>Nom complet*
+                    <label><span data-translate="contact_form_name">Nom complet*</span>
                         <input type="text" name="name" required value="<?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($name ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </label>
-                    <label>Email professionnel*
+                    <label><span data-translate="contact_form_email">Email professionnel*</span>
                         <input type="email" name="email" required value="<?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($email ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </label>
-                    <label>Téléphone
+                    <label><span data-translate="contact_form_phone">Téléphone</span>
                         <input type="text" name="phone" value="<?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($phone ?? '', ENT_QUOTES, 'UTF-8'); ?>">
                     </label>
-                    <label>Type de projet
+                    <label><span data-translate="contact_form_project_type">Type de projet</span>
                         <select name="project_type">
-                            <option value="">Sélectionner</option>
-                            <option value="construction" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'construction') ? 'selected' : ''); ?>>Construction neuve</option>
-                            <option value="renovation" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'renovation') ? 'selected' : ''); ?>>Rénovation complète</option>
-                            <option value="decoration" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'decoration') ? 'selected' : ''); ?>>Décoration & aménagement</option>
+                            <option value="" data-translate-option="contact_form_select">Sélectionner</option>
+                            <option value="construction" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'construction') ? 'selected' : ''); ?> data-translate-option="contact_form_project_construction">Construction neuve</option>
+                            <option value="renovation" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'renovation') ? 'selected' : ''); ?> data-translate-option="contact_form_project_renovation">Rénovation complète</option>
+                            <option value="decoration" <?php echo (isset($alert) && $alert['type'] === 'success') ? '' : ((isset($projectType) && $projectType === 'decoration') ? 'selected' : ''); ?> data-translate-option="contact_form_project_decoration">Décoration & aménagement</option>
                         </select>
                     </label>
-                    <label>Message*
+                    <label><span data-translate="contact_form_message">Message*</span>
                         <textarea name="message" rows="4" required><?php echo (isset($alert) && $alert['type'] === 'success') ? '' : htmlspecialchars($message ?? '', ENT_QUOTES, 'UTF-8'); ?></textarea>
                     </label>
-                    <button type="submit" class="btn primary">Envoyer</button>
+                    <button type="submit" class="btn primary" data-translate="contact_form_submit">Envoyer</button>
                 </form>
                 <div class="contact-details">
                     <div>
@@ -447,7 +480,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <footer class="footer">
         <div>
             <strong>Atlas Cera</strong>
-            <p>Construction • Rénovation • Décoration</p>
+            <p data-translate="footer_text">Construction • Rénovation • Décoration</p>
         </div>
        
     </footer>
@@ -666,29 +699,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
                     if (href && href !== '#') {
-                        e.preventDefault();
-                        const target = document.querySelector(href);
-                        if (target) {
-                            const navbarHeight = navbar.offsetHeight || 70;
-                            const targetRect = target.getBoundingClientRect();
-                            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                            const offsetTop = targetRect.top + scrollTop - navbarHeight;
-                            
-                            window.scrollTo({
-                                top: Math.max(0, offsetTop),
-                                behavior: 'smooth'
-                            });
-                            
-                            // Close mobile menu
-                            const navToggle = document.getElementById('nav-toggle');
-                            if (navToggle && navToggle.checked) {
-                                navToggle.checked = false;
-                                document.body.style.overflow = '';
+                        // Extract hash from href (handle both index.php#gallery and #gallery)
+                        const hash = href.includes('#') ? href.split('#')[1] : null;
+                        if (hash) {
+                            e.preventDefault();
+                            const target = document.getElementById(hash);
+                            if (target) {
+                                const navbarHeight = navbar.offsetHeight || 70;
+                                const targetRect = target.getBoundingClientRect();
+                                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                                const offsetTop = targetRect.top + scrollTop - navbarHeight - 20;
+                                
+                                window.scrollTo({
+                                    top: Math.max(0, offsetTop),
+                                    behavior: 'smooth'
+                                });
+                                
+                                // Update URL without reload
+                                history.pushState(null, null, '#' + hash);
+                                
+                                // Close mobile menu
+                                const navToggle = document.getElementById('nav-toggle');
+                                if (navToggle && navToggle.checked) {
+                                    navToggle.checked = false;
+                                    document.body.style.overflow = '';
+                                }
                             }
                         }
                     }
                 });
             });
+            
+            // Handle hash on page load
+            if (window.location.hash) {
+                setTimeout(() => {
+                    const hash = window.location.hash.substring(1);
+                    const target = document.getElementById(hash);
+                    if (target) {
+                        const navbarHeight = navbar.offsetHeight || 70;
+                        const targetRect = target.getBoundingClientRect();
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        const offsetTop = targetRect.top + scrollTop - navbarHeight - 20;
+                        
+                        window.scrollTo({
+                            top: Math.max(0, offsetTop),
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
+            }
 
             // Mobile menu management
             const navToggle = document.getElementById('nav-toggle');
@@ -976,6 +1035,102 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     scrollToContactSection();
                 }
             }
+        })();
+        
+        // ============================================
+        // GALLERY LIGHTBOX - Galerie avec Lightbox
+        // ============================================
+        (function() {
+            'use strict';
+
+            const gallery = document.getElementById('modernGallery');
+            const lightboxModal = document.getElementById('lightboxModal');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxPrev = document.getElementById('lightboxPrev');
+            const lightboxNext = document.getElementById('lightboxNext');
+            const lightboxCurrent = document.getElementById('lightboxCurrent');
+            const lightboxTotal = document.getElementById('lightboxTotal');
+            const galleryItems = document.querySelectorAll('.modern-gallery-item');
+
+            if (!gallery || !lightboxModal || !galleryItems.length) return;
+
+            let currentLightboxIndex = 0;
+            const totalImages = galleryItems.length;
+
+            if (lightboxTotal) {
+                lightboxTotal.textContent = totalImages;
+            }
+
+            function openLightbox(index) {
+                currentLightboxIndex = index;
+                updateLightboxImage();
+                lightboxModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function updateLightboxImage() {
+                const item = galleryItems[currentLightboxIndex];
+                if (item) {
+                    const imgSrc = item.querySelector('img').getAttribute('data-src');
+                    lightboxImage.src = imgSrc;
+                    if (lightboxCurrent) {
+                        lightboxCurrent.textContent = currentLightboxIndex + 1;
+                    }
+                }
+            }
+
+            function navigateLightbox(direction) {
+                currentLightboxIndex += direction;
+                if (currentLightboxIndex < 0) {
+                    currentLightboxIndex = totalImages - 1;
+                } else if (currentLightboxIndex >= totalImages) {
+                    currentLightboxIndex = 0;
+                }
+                updateLightboxImage();
+            }
+
+            // Event Listeners
+            galleryItems.forEach((item, index) => {
+                item.addEventListener('click', () => openLightbox(index));
+            });
+
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+            if (lightboxPrev) {
+                lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+            }
+            if (lightboxNext) {
+                lightboxNext.addEventListener('click', () => navigateLightbox(1));
+            }
+
+            // Close on overlay click
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', (e) => {
+                    if (e.target === lightboxModal || e.target.classList.contains('lightbox-content')) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightboxModal && lightboxModal.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowLeft') {
+                        navigateLightbox(-1);
+                    } else if (e.key === 'ArrowRight') {
+                        navigateLightbox(1);
+                    }
+                }
+            });
         })();
     </script>
 </body>
