@@ -1322,36 +1322,75 @@ h3 {
 /* ============================================
    Bouton Retour en haut (Scroll to Top)
    ============================================ */
+/* ============================================
+   زر العودة إلى الأعلى - Retour en haut
+   يبقى ثابتًا فوق جميع الأقسام
+   ============================================ */
 .scroll-to-top {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
+    /* Position fixed - يبقى ثابتًا عند التمرير */
+    position: fixed !important;
+    
+    /* الموقع: أسفل يمين الصفحة */
+    bottom: 2rem !important;
+    right: 2rem !important;
+    
+    /* الحجم */
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: rgba(239, 140, 0, 0.9);
+    
+    /* الألوان والخلفية */
+    background: rgba(239, 140, 0, 0.9) !important;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     color: #0c0d12;
+    
+    /* التخطيط */
     cursor: pointer;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
+    
+    /* الظل */
     box-shadow: 0 4px 20px rgba(239, 140, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* الانتقالات */
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                visibility 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* الحالة الافتراضية: مخفي */
     opacity: 0;
     visibility: hidden;
     transform: translateY(20px) scale(0.8);
-    z-index: 9998;
+    
+    /* z-index عالي جدًا - فوق جميع العناصر بما في ذلك sections et navbar */
+    /* Z-index très élevé - Au-dessus de tous les éléments y compris navbar */
+    z-index: 99999999 !important;
+    
+    /* إزالة padding و margin */
     padding: 0;
     margin: 0;
+    pointer-events: none;
+    
+    /* ضمان عدم التأثر بعناصر أخرى */
+    isolation: isolate;
+    
+    /* ضمان أن الزر فوق جميع الأقسام */
+    transform-style: preserve-3d;
 }
 
 .scroll-to-top.show {
-    opacity: 1;
-    visibility: visible;
+    /* إظهار الزر عند التمرير */
+    opacity: 1 !important;
+    visibility: visible !important;
     transform: translateY(0) scale(1);
+    pointer-events: auto;
+    
+    /* التأكد من أن z-index عالي جدًا - فوق جميع الأقسام والـ navbar */
+    /* S'assurer que z-index est très élevé - Au-dessus de toutes les sections et navbar */
+    z-index: 999999 !important;
 }
 
 .scroll-to-top:hover {
@@ -1377,6 +1416,21 @@ h3 {
     transform: translateY(-2px);
 }
 
+.scroll-to-top-text {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #0c0d12;
+    line-height: 1;
+    margin-top: 2px;
+    transition: transform 0.3s ease;
+}
+
+.scroll-to-top:hover .scroll-to-top-text {
+    transform: translateY(-1px);
+}
+
 /* Responsive pour le bouton */
 @media (max-width: 768px) {
     .scroll-to-top {
@@ -1389,6 +1443,10 @@ h3 {
     .scroll-to-top svg {
         width: 20px;
         height: 20px;
+    }
+    
+    .scroll-to-top-text {
+        display: none; /* Masquer le texte sur mobile */
     }
 }
 
@@ -1685,6 +1743,44 @@ section#expertises,
     overflow: visible !important;
     /* إزالة isolation */
     isolation: auto !important;
+}
+
+/* ضمان أن sections process, testimonials, contact لا تخفي الزر */
+.section.process,
+.section.testimonials,
+.section.contact,
+.process,
+.testimonials,
+.contact {
+    z-index: -1 !important;
+    position: relative !important;
+    overflow: visible !important;
+    isolation: auto !important;
+    transform: none !important;
+    filter: none !important;
+}
+
+/* ضمان أن جميع العناصر داخل sections لا تخفي الزر */
+.section.process *,
+.section.testimonials *,
+.section.contact *,
+.process *,
+.testimonials *,
+.contact * {
+    z-index: auto !important;
+    position: relative !important;
+}
+
+/* Règle spéciale pour garantir que le bouton est toujours visible */
+/* Règles spéciales pour garantir que le bouton est toujours au-dessus de tout */
+#scrollToTop.scroll-to-top,
+button#scrollToTop,
+.scroll-to-top#scrollToTop,
+button.scroll-to-top,
+.scroll-to-top {
+    z-index: 999999 !important;
+    position: fixed !important;
+    will-change: transform, opacity !important;
 }
 
 /* قواعد خاصة لـ hero - منع أي شيء يخفي navbar */

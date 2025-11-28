@@ -69,6 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css?v=1">
+    <script src="assets/js/scroll-to-top.js" defer></script>
 </head>
 <body>
     <!-- Navbar منفصل - خارج hero -->
@@ -452,11 +453,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </footer>
     
     <!-- Bouton Retour en haut -->
-    <button id="scrollToTop" class="scroll-to-top" aria-label="Retour en haut de la page">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
-    </button>
+    <?php include __DIR__ . '/scroll-to-top-button.php'; ?>
     
     <script>
         // ============================================
@@ -724,40 +721,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         })();
         
         // ============================================
-        // Bouton Retour en haut (Scroll to Top)
+        // Scroll to Top Button - Géré par scroll-to-top.js
         // ============================================
-        (function() {
-            'use strict';
-            
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            if (!scrollToTopBtn) return;
-            
-            // Fonction pour afficher/masquer le bouton selon le scroll
-            function toggleScrollButton() {
-                if (window.pageYOffset > 300) {
-                    scrollToTopBtn.classList.add('show');
-                } else {
-                    scrollToTopBtn.classList.remove('show');
-                }
-            }
-            
-            // Fonction pour remonter en haut avec scroll smooth
-            function scrollToTop() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-            
-            // Écouter le scroll
-            window.addEventListener('scroll', toggleScrollButton, { passive: true });
-            
-            // Écouter le clic sur le bouton
-            scrollToTopBtn.addEventListener('click', scrollToTop);
-            
-            // Vérifier la position initiale
-            toggleScrollButton();
-        })();
 
         // Gallery Slider
         (function() {
