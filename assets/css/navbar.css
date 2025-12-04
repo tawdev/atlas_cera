@@ -1,0 +1,407 @@
+/**
+ * ============================================
+ * NAVBAR - نظام جديد ونظيف
+ * تصميم متجاوب كامل للشاشات المكتبية والهواتف
+ * ============================================
+ */
+
+/* ============================================
+   المتغيرات (Variables)
+   ============================================ */
+:root {
+    --navbar-height: 70px;
+    --navbar-bg: rgba(8, 10, 19, 0.95);
+    --navbar-bg-scrolled: rgba(8, 10, 19, 0.98);
+    --navbar-text: #f7f7f5;
+    --navbar-primary: #ef8c41;
+    --navbar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --menu-width-mobile: 320px;
+}
+
+/* ============================================
+   Navbar Container
+   ============================================ */
+.main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--navbar-height);
+    background: var(--navbar-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: var(--navbar-transition);
+}
+
+.main-navbar.scrolled {
+    background: var(--navbar-bg-scrolled);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* ============================================
+   Brand / Logo
+   ============================================ */
+.navbar-brand {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--navbar-text);
+    z-index: 1001;
+    flex-shrink: 0;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar-brand:hover {
+    text-decoration: none;
+}
+
+.navbar-brand span {
+    color: var(--navbar-text);
+}
+
+.navbar-brand strong {
+    color: var(--navbar-primary);
+    margin-left: 0.2rem;
+    font-weight: 700;
+}
+
+html[dir="rtl"] .navbar-brand strong {
+    margin-left: 0;
+    margin-right: 0.2rem;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ============================================
+   Desktop Menu (الشاشات الكبيرة)
+   ============================================ */
+.navbar-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-list li {
+    margin: 0;
+    padding: 0;
+}
+
+.menu-link {
+    display: block;
+    padding: 0.6rem 1.2rem;
+    color: var(--navbar-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 8px;
+    transition: var(--navbar-transition);
+    position: relative;
+    white-space: nowrap;
+}
+
+.menu-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0.3rem;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 2px;
+    background: var(--navbar-primary);
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+}
+
+.menu-link:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.menu-link:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+.menu-link:active {
+    transform: scale(0.98);
+}
+
+/* Language Link */
+.menu-item-lang {
+    margin-left: 0.5rem;
+}
+
+.lang-link {
+    background: rgba(239, 140, 65, 0.15) !important;
+    border: 1px solid rgba(239, 140, 65, 0.3) !important;
+    color: var(--navbar-primary) !important;
+    font-weight: 600 !important;
+}
+
+.lang-link::after {
+    display: none !important;
+}
+
+.lang-link:hover {
+    background: rgba(239, 140, 65, 0.25) !important;
+    border-color: var(--navbar-primary) !important;
+    color: #fff !important;
+}
+
+/* ============================================
+   Mobile Menu Toggle Button
+   ============================================ */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1002;
+    position: relative;
+    transition: var(--navbar-transition);
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    position: relative;
+}
+
+.icon-line {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--navbar-text);
+    border-radius: 2px;
+    transition: var(--navbar-transition);
+    transform-origin: center;
+}
+
+.menu-toggle:hover .icon-line {
+    background: var(--navbar-primary);
+}
+
+/* Menu Toggle Active State (X icon) */
+.menu-toggle.active .icon-line:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+
+.menu-toggle.active .icon-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.menu-toggle.active .icon-line:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ============================================
+   Mobile Menu Overlay
+   ============================================ */
+.menu-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.menu-overlay.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ============================================
+   Mobile Styles (الشاشات الصغيرة)
+   ============================================ */
+@media (max-width: 900px) {
+    .navbar-container {
+        padding: 0 1.5rem;
+    }
+    
+    /* Show Menu Toggle Button */
+    .menu-toggle {
+        display: flex;
+    }
+    
+    /* Hide Desktop Menu by Default */
+    .navbar-menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: var(--menu-width-mobile);
+        max-width: 85%;
+        height: 100vh;
+        background: rgba(8, 10, 19, 0.98);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+        padding: calc(var(--navbar-height) + 2rem) 2rem 2rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        display: block;
+    }
+    
+    /* Show Menu when Active */
+    .navbar-menu.active {
+        transform: translateX(0);
+    }
+    
+    /* RTL Support - دعم العربية */
+    html[dir="rtl"] .navbar-menu {
+        right: auto;
+        left: 0;
+        border-left: none;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.5);
+        transform: translateX(-100%);
+    }
+    
+    html[dir="rtl"] .navbar-menu.active {
+        transform: translateX(0);
+    }
+    
+    /* Menu List - Vertical Layout */
+    .menu-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    
+    .menu-list li {
+        width: 100%;
+    }
+    
+    /* Menu Links - Full Width */
+    .menu-link {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+    
+    html[dir="rtl"] .menu-link {
+        text-align: right;
+    }
+    
+    .menu-link::after {
+        display: none;
+    }
+    
+    .menu-link:hover {
+        background: rgba(239, 140, 65, 0.2);
+        border-color: var(--navbar-primary);
+        color: #fff;
+        transform: translateX(4px);
+    }
+    
+    html[dir="rtl"] .menu-link:hover {
+        transform: translateX(-4px);
+    }
+    
+    /* Language Link in Mobile */
+    .menu-item-lang {
+        margin-left: 0;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .menu-item-lang .lang-link {
+        text-align: center;
+        justify-content: center;
+    }
+    
+    /* Custom Scrollbar for Mobile Menu */
+    .navbar-menu::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .navbar-menu::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .navbar-menu::-webkit-scrollbar-thumb {
+        background: var(--navbar-primary);
+        border-radius: 3px;
+    }
+    
+    .navbar-menu::-webkit-scrollbar-thumb:hover {
+        background: var(--navbar-primary);
+        opacity: 0.8;
+    }
+}
+
+/* ============================================
+   Prevent Body Scroll when Menu is Open
+   ============================================ */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   Body Padding for Fixed Navbar
+   ============================================ */
+body {
+    padding-top: var(--navbar-height);
+}
+
